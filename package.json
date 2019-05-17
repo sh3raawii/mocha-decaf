@@ -2,13 +2,26 @@
   "name": "mocha-dry",
   "version": "0.0.1",
   "description": "Run Mocha tests in dry run mode",
-  "bin": "cli.js",
+  "keywords": [
+    "mocha",
+    "dry",
+    "dry-run"
+  ],
+  "main": "main.js",
+  "bin": {
+    "mocha-dry": "main.js",
+    "mocha-dry-basic": "basic.js"
+  },
   "author": "Mostafa Mahmoud <mostafa_mahmoud@protonmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "node main.js --recursive"
+  },
   "peerDependencies": {
     "mocha": "^6.1.4"
   },
   "devDependencies": {
+    "mocha": "^6.1.4",
     "standard": "^12.0.1"
   },
   "standard": {
