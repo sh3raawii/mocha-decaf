@@ -1,0 +1,11 @@
+{
+  "name": "mocha-dry",
+  "version": "0.0.1",
+  "description": "Run Mocha tests in dry run mode",
+  "bin": "cli.js",
+  "author": "Mostafa Mahmoud <mostafa_mahmoud@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "^6.1.4"
+  }
+}
