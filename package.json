@@ -5,7 +5,7 @@
   "bin": "cli.js",
   "author": "Mostafa Mahmoud <mostafa_mahmoud@protonmail.com>",
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "mocha": "^6.1.4"
   },
   "devDependencies": {
