@@ -1,8 +1,6 @@
 const Mocha = require('mocha')
-const util = require('util')
 const path = require('path')
 const fs = require('fs')
-const readdir = util.promisify(fs.readdir)
 
 /**
  * 
@@ -12,15 +10,16 @@ const isJSFile = (filePath) => filePath.substr(-3) === '.js'
 
 /**
  * 
- * @param {String} testDirectory Path of the project test directory
+ * @param {String} dir Path to a dir
  */
-const listAllFiles = async (testDirectory) => {
+const listAllFiles = (dir) => {
     let JSFiles = []
-    const dirContents = await readdir(testDirectory, {withFileTypes: true})
+    const dirContents = fs.readdirSync(dir)
     for (const item of dirContents) {
-        const itemPath = path.join(testDirectory, item.name)
-        if (item.isFile()) JSFiles.push(itemPath)
-        else if (item.isDirectory()) JSFiles = JSFiles.concat(await listAllFiles(itemPath))
+        const itemPath = path.join(dir, item)
+        const itemStat = fs.statSync(itemPath)
+        if (itemStat.isFile()) JSFiles.push(itemPath)
+        else if (itemStat.isDirectory()) JSFiles = JSFiles.concat(listAllFiles(itemPath))
     }
     return JSFiles
 }

@@ -24,7 +24,7 @@ const args = getArgs()
 // Instantiate a Mocha instance
 const mocha = new Mocha()
 // List all JS files and add them to mocha
-const files = await listAllFiles(args.testDir)
+const files = listAllFiles(args.testDir)
 files.filter(isJSFile).forEach((testFile) => {
     mocha.addFile(testFile)
 })
