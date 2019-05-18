@@ -1,18 +1,20 @@
 {
-  "name": "mocha-dry",
-  "version": "0.0.1",
+  "name": "mocha-decaf",
+  "version": "0.1.0",
   "description": "Run Mocha tests in dry run mode",
   "keywords": [
     "mocha",
     "dry",
-    "dry-run"
+    "dry-run",
+    "list",
+    "tests"
   ],
   "main": "main.js",
   "bin": {
-    "mocha-dry": "main.js",
-    "mocha-dry-basic": "basic.js"
+    "mocha-decaf": "main.js",
+    "mocha-list": "list.js"
   },
-  "author": "Mostafa Mahmoud <mostafa_mahmoud@protonmail.com>",
+  "author": "Mostafa Yassin <mostafa_mahmoud@protonmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "node main.js --recursive"

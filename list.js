@@ -5,8 +5,8 @@ const { listAllFiles, isJSFile, patchTestRunner, exitMocha } = require('./lib')
 
 const getArgs = () => {
   if ((process.argv.length <= 2) || ((process.argv[2] === '-h') || (process.argv[2] === '--help'))) {
-    console.log('Use: mocha-dry-basic <test-dir>\n')
-    console.log('Copyright(c) 2019 Mostafa Yassin - MIT Licensed')
+    console.log('Use: mocha-list <test-dir>\n')
+    console.log('Copyright(c) 2019 Mostafa Yassin <mostafa_mahmoud@protonmail.com> - MIT Licensed')
     process.exit(0)
   }
   const testDir = process.argv[2] || 'test'
