@@ -2,6 +2,7 @@
 
 [Mocha](https://mochajs.org/) with zero caffeine
 
+[![Build Status](https://travis-ci.org/sh3raawii/mocha-decaf.svg?branch=master)](https://travis-ci.org/sh3raawii/mocha-decaf)
 
 ## Install
 
