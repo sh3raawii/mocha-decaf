@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const Mocha = require('mocha')
-const { listAllFiles, isJSFile, patchTestRunner } = require('./lib')
+const { listAllFiles, isJSFile, patchTestRunner, exitMocha } = require('./lib')
 
 const getArgs = () => {
   if ((process.argv.length <= 2) || ((process.argv[2] === '-h') || (process.argv[2] === '--help'))) {
@@ -31,10 +31,7 @@ const main = async () => {
   // Patch Mocha's test runner
   patchTestRunner()
   // Run the tests
-  mocha.run((failures) => {
-    process.exitCode = failures ? 1 : 0
-    process.exit()
-  })
+  mocha.run(exitMocha)
 }
 
 main().catch((error) => {

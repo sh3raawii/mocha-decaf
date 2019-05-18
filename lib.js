@@ -33,8 +33,39 @@ const patchTestRunner = () => {
   }
 }
 
+/**
+ * Exits Mocha when Mocha itself has finished execution, regardless of
+ * what the tests or code under test is doing.
+ * @param {number} code - Exit code; typically # of failures
+ */
+const exitMocha = code => {
+  const clampedCode = Math.min(code, 255)
+  let draining = 0
+
+  // Eagerly set the process's exit code in case stream.write doesn't
+  // execute its callback before the process terminates.
+  process.exitCode = clampedCode
+
+  // flush output for Node.js Windows pipe bug
+  const done = () => {
+    if (!draining--) {
+      process.exit(clampedCode)
+    }
+  }
+
+  const streams = [process.stdout, process.stderr]
+  streams.forEach(stream => {
+    // submit empty write request and wait for completion
+    draining += 1
+    stream.write('', done)
+  })
+
+  done()
+}
+
 module.exports = {
   isJSFile,
   listAllFiles,
-  patchTestRunner
+  patchTestRunner,
+  exitMocha
 }
