@@ -7,7 +7,7 @@
     "dry",
     "dry-run",
     "list",
-    "tests"
+    "test"
   ],
   "main": "main.js",
   "bin": {
@@ -15,6 +15,11 @@
     "mocha-list": "list.js"
   },
   "author": "Mostafa Yassin <mostafa_mahmoud@protonmail.com>",
+  "homepage": "https://github.com/sh3raawii/mocha-decaf.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sh3raawii/mocha-decaf.git"
+  },
   "license": "MIT",
   "scripts": {
     "test": "node main.js --recursive"
