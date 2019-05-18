@@ -33,6 +33,7 @@ const main = async () => {
   // Run the tests
   mocha.run((failures) => {
     process.exitCode = failures ? 1 : 0
+    process.exit()
   })
 }
 
