@@ -1,9 +1,8 @@
 describe('nested test suite', async () => {
-
   before(() => {
     throw new Error('BeforeAll hook was triggered')
   })
-  
+
   beforeEach(() => {
     throw new Error('BeforeEach hook was triggered')
   })

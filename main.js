@@ -4,7 +4,7 @@
  * Patch Mocha's Test Runner then run mocha
  */
 
- const { patchTestRunner, patchBeforeEach, patchAfterEach, patchBeforeAll, patchAfterAll } = require('./lib')
+const { patchTestRunner, patchBeforeEach, patchAfterEach, patchBeforeAll, patchAfterAll } = require('./lib')
 
 // Patch Mocha's Hooks
 patchBeforeEach()
