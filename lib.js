@@ -34,6 +34,42 @@ const patchTestRunner = () => {
 }
 
 /**
+ * Patch BeforeEach of the Mocha Suite to do nothing
+ */
+const patchBeforeEach = () => {
+  Mocha.Suite.prototype.beforeEach = () => {
+    return this
+  }
+}
+
+/**
+ * Patch AfterEach of the Mocha Suite to do nothing
+ */
+const patchAfterEach = () => {
+  Mocha.Suite.prototype.afterEach = () => {
+    return this
+  }
+}
+
+/**
+ * Patch BeforeAll of the Mocha Suite to do nothing
+ */
+const patchBeforeAll = () => {
+  Mocha.Suite.prototype.beforeAll = () => {
+    return this
+  }
+}
+
+/**
+ * Patch AfterAll of the Mocha Suite to do nothing
+ */
+const patchAfterAll = () => {
+  Mocha.Suite.prototype.afterAll = () => {
+    return this
+  }
+}
+
+/**
  * Exits Mocha when Mocha itself has finished execution, regardless of
  * what the tests or code under test is doing.
  * @param {number} code - Exit code; typically # of failures
@@ -67,5 +103,9 @@ module.exports = {
   isJSFile,
   listAllFiles,
   patchTestRunner,
+  patchBeforeEach,
+  patchBeforeAll,
+  patchAfterEach,
+  patchAfterAll,
   exitMocha
 }

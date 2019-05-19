@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const Mocha = require('mocha')
-const { listAllFiles, isJSFile, patchTestRunner, exitMocha } = require('./lib')
+const { listAllFiles, isJSFile, patchTestRunner, patchBeforeEach, patchAfterEach, patchBeforeAll, patchAfterAll, exitMocha } = require('./lib')
 
 const getArgs = () => {
   if ((process.argv.length <= 2) || ((process.argv[2] === '-h') || (process.argv[2] === '--help'))) {
@@ -28,6 +28,11 @@ const main = async () => {
   files.filter(isJSFile).forEach((testFile) => {
     mocha.addFile(testFile)
   })
+  // Patch Mocha's hooks
+  patchBeforeEach()
+  patchAfterEach()
+  patchBeforeAll()
+  patchAfterAll()
   // Patch Mocha's test runner
   patchTestRunner()
   // Run the tests
