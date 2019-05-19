@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "node main.js --recursive"
+    "test": "standard && node main.js --recursive"
   },
   "peerDependencies": {
     "mocha": "^6.1.4"
