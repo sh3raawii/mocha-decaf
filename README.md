@@ -7,9 +7,14 @@
 
 ## Install
 
-The package is not published on [npm](https://www.npmjs.com/) just yet, you will have to use github repo url for now.
+Using [npm](https://www.npmjs.com/)
 ```Shell
-$ yarn add https://github.com/sh3raawii/mocha-decaf.git
+$ npm i mocha-decaf
+```
+
+Alternatively using [yarn](https://yarnpkg.com/en/)
+```Shell
+$ yarn add mocha-decaf
 ```
 
 ## Usage
@@ -28,11 +33,13 @@ For a complete list of command line arguments and options check [Mocha's Documen
 
 The command simply patches Mocha's test runner to pass any test then calls `mocha` to run all tests.
 
+Starting from `v0.2.0` it also patches `before`, `beforeEach`, `after` and `afterEach`
+
 ## Caveats
 
 - Some `mocha` arguments won't behave identically when used with `mocha-decaf` most notably `--forbid-only` because it should make the tests marked as `.only` fail however all tests will pass.
 - All tests pass no matter what options you pass to `mocha-decaf`.
-- There is another command provided by the package named `mocha-list` that will run all tests in the test directory specified in dry-run mode as well however it's not as flexible as `mocha-decaf`
+- There is another command provided by the package named `mocha-list` that will run all tests in the specified test directory in dry-run mode as well however it's not as flexible as `mocha-decaf`
 
 ## License
 
