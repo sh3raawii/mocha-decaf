@@ -3,6 +3,7 @@
 [Mocha](https://mochajs.org/) with zero caffeine
 
 [![Build Status](https://travis-ci.org/sh3raawii/mocha-decaf.svg?branch=master)](https://travis-ci.org/sh3raawii/mocha-decaf)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 ## Install
 
