@@ -99,6 +99,13 @@ const exitMocha = code => {
   done()
 }
 
+/**
+ * Start Mocha
+ */
+const startMocha = () => {
+  require('mocha/bin/_mocha')
+}
+
 module.exports = {
   isJSFile,
   listAllFiles,
@@ -107,5 +114,6 @@ module.exports = {
   patchBeforeAll,
   patchAfterEach,
   patchAfterAll,
+  startMocha,
   exitMocha
 }
