@@ -29,7 +29,8 @@
   "contributors": [],
   "license": "MIT",
   "scripts": {
-    "test": "standard && tav"
+    "test": "standard && tav",
+    "test:dev": "node main.js --recursive"
   },
   "dependencies": {},
   "peerDependencies": {

@@ -3,23 +3,23 @@ const path = require('path')
 const fs = require('fs')
 
 /**
- *
+ * Check whether the file has the extension of JS files (*.js)
  * @param {String} filePath Path to a file holding filename and file extension
  */
 const isJSFile = (filePath) => filePath.substr(-3) === '.js'
 
 /**
- *
+ * List all the files in a given directory, by default in recursive fashion
  * @param {String} dir Path to a dir
  */
-const listAllFiles = (dir) => {
+const listFiles = (dir, recursive = true) => {
   let JSFiles = []
   const dirContents = fs.readdirSync(dir)
   for (const item of dirContents) {
     const itemPath = path.join(dir, item)
     const itemStat = fs.statSync(itemPath)
     if (itemStat.isFile()) JSFiles.push(itemPath)
-    else if (itemStat.isDirectory()) JSFiles = JSFiles.concat(listAllFiles(itemPath))
+    else if (itemStat.isDirectory() && recursive) JSFiles = JSFiles.concat(listFiles(itemPath))
   }
   return JSFiles
 }
@@ -100,6 +100,43 @@ const exitMocha = code => {
 }
 
 /**
+ * Run mocha programatically on the given test files
+ * @param {Array} files list of the test files
+ * @param {Object} mochaArgs Object holding mocha arguments, Refer to mocha's documentation
+ */
+const runMocha = async (files = [], mochaArgs = {}) => {
+  const mocha = new Mocha(mochaArgs)
+  files.forEach((testFile) => {
+    mocha.addFile(testFile)
+  })
+  patchBeforeEach()
+  patchAfterEach()
+  patchBeforeAll()
+  patchAfterAll()
+  patchTestRunner()
+  return mocha.run(exitMocha)
+}
+
+/**
+ * List all tests that were executed by the test runner
+ * @param {Mocha.Runner} runner Mocha's test runner after calling .run()
+ */
+const listExecutedTests = (runner) => {
+  const listTests = (suite, basename = '') => {
+    const title = basename + ' ' + suite.title
+    let tests = []
+    for (const test of suite.tests) {
+      tests.push(title + ' ' + test.title)
+    }
+    for (const s of suite.suites) {
+      tests = tests.concat(listTests(s, title))
+    }
+    return tests
+  }
+  return listTests(runner.suite).map(test => test.trim())
+}
+
+/**
  * Start Mocha
  */
 const startMocha = () => {
@@ -107,13 +144,15 @@ const startMocha = () => {
 }
 
 module.exports = {
+  exitMocha,
   isJSFile,
-  listAllFiles,
+  listFiles,
+  listExecutedTests,
   patchTestRunner,
   patchBeforeEach,
   patchBeforeAll,
   patchAfterEach,
   patchAfterAll,
-  startMocha,
-  exitMocha
+  runMocha,
+  startMocha
 }

@@ -18,4 +18,10 @@ describe('nested test suite', async () => {
   it('nested test case', async () => {
     throw new Error('nested test case body was executed')
   })
+
+  describe('another nested test suite', async () => {
+    it('another nested test case', async () => {
+      throw new Error('another nested test case body was executed')
+    })
+  })
 })
