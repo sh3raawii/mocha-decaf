@@ -122,18 +122,17 @@ const runMocha = async (files = [], mochaArgs = {}) => {
  * @param {Mocha.Runner} runner Mocha's test runner after calling .run()
  */
 const listExecutedTests = (runner) => {
-  const listTests = (suite, basename = '') => {
-    const title = basename + ' ' + suite.title
+  const listTests = (suite) => {
     let tests = []
     for (const test of suite.tests) {
-      tests.push(title + ' ' + test.title)
+      tests.push(suite.fullTitle() + ' ' + test.title)
     }
     for (const s of suite.suites) {
-      tests = tests.concat(listTests(s, title))
+      tests = tests.concat(listTests(s))
     }
     return tests
   }
-  return listTests(runner.suite).map(test => test.trim())
+  return listTests(runner.suite)
 }
 
 /**
@@ -144,7 +143,6 @@ const startMocha = () => {
 }
 
 module.exports = {
-  exitMocha,
   isJSFile,
   listFiles,
   listExecutedTests,

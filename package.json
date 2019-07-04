@@ -30,7 +30,7 @@
   "license": "MIT",
   "scripts": {
     "test": "standard && tav",
-    "test:dev": "node main.js --recursive"
+    "test:dev": "node list.js"
   },
   "dependencies": {},
   "peerDependencies": {
