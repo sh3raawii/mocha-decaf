@@ -4,8 +4,8 @@ const fs = require('fs')
 
 /**
  * does the file has the extension of JS files (*.js)
- * @param {String} filePath path to a file
- * @returns {Boolean} true if the file has .js extension, false otherwise
+ * @param {string} filePath path to a file
+ * @returns {boolean} true if the file has .js extension, false otherwise
  * @example
  * > isJSFile('./index.js')
  * true
@@ -14,9 +14,9 @@ const isJSFile = (filePath) => filePath.substr(-3) === '.js'
 
 /**
  * List all the files in a given directory, by default in recursive mode
- * @param {String} dir Path to a dir
- * @param {Boolean} [recursive=true] Search in nested directories
- * @returns {String[]} Array of files found in the given directory
+ * @param {string} dir Path to a dir
+ * @param {boolean} [recursive=true] Search in nested directories
+ * @returns {string[]} Array of files found in the given directory
  * @example
  * > listFiles('./')
  * ['main.js', 'package.json', 'README.md', 'test/main.test.js']
@@ -168,7 +168,7 @@ const runMocha = async (files = [], mochaOptions = {}) => {
  * List all tests that were executed by a mocha test runner
  * @see {@link https://mochajs.org/api/runner|Mocha Runner}
  * @param {Mocha.Runner} runner {@link https://mochajs.org/api/runner|Mocha Runner instance}
- * @returns {String[]} Array of the full test names that were executed (Root suite name + child suite names + test name)
+ * @returns {string[]} Array of the full test names that were executed (Root suite name + child suite names + test name)
  * @example
  * > listExecutedTests(runMocha(['./test/main.test.js'], { reporter: 'base' }))
  * [ 'test suite test case' ]
