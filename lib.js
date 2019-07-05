@@ -3,14 +3,25 @@ const path = require('path')
 const fs = require('fs')
 
 /**
- * Check whether the file has the extension of JS files (*.js)
- * @param {String} filePath Path to a file holding filename and file extension
+ * does the file has the extension of JS files (*.js)
+ * @param {String} filePath path to a file
+ * @returns {Boolean} true if the file has .js extension, false otherwise
+ * @example
+ * > isJSFile('./index.js')
+ * true
  */
 const isJSFile = (filePath) => filePath.substr(-3) === '.js'
 
 /**
- * List all the files in a given directory, by default in recursive fashion
+ * List all the files in a given directory, by default in recursive mode
  * @param {String} dir Path to a dir
+ * @param {Boolean} [recursive=true] Search in nested directories
+ * @returns {String[]} Array of files found in the given directory
+ * @example
+ * > listFiles('./')
+ * ['main.js', 'package.json', 'README.md', 'test/main.test.js']
+ * > listFiles('./', false)
+ * ['main.js', 'package.json', 'README.md']
  */
 const listFiles = (dir, recursive = true) => {
   let JSFiles = []
@@ -26,6 +37,8 @@ const listFiles = (dir, recursive = true) => {
 
 /**
  * Patch the runTest method of the Mocha Test Runner to pass all tests
+ * @example
+ * patchTestRunner()
  */
 const patchTestRunner = () => {
   Mocha.Runner.prototype.runTest = (callback) => {
@@ -34,7 +47,9 @@ const patchTestRunner = () => {
 }
 
 /**
- * Patch BeforeEach of the Mocha Suite to do nothing
+ * Patch beforeEach() to do nothing
+ * @example
+ * patchBeforeEach()
  */
 const patchBeforeEach = () => {
   Mocha.Suite.prototype.beforeEach = () => {
@@ -43,7 +58,9 @@ const patchBeforeEach = () => {
 }
 
 /**
- * Patch AfterEach of the Mocha Suite to do nothing
+ * Patch afterEach() to do nothing
+ * @example
+ * patchAfterEach()
  */
 const patchAfterEach = () => {
   Mocha.Suite.prototype.afterEach = () => {
@@ -52,7 +69,9 @@ const patchAfterEach = () => {
 }
 
 /**
- * Patch BeforeAll of the Mocha Suite to do nothing
+ * Patch before() to do nothing
+ * @example
+ * patchBeforeAll()
  */
 const patchBeforeAll = () => {
   Mocha.Suite.prototype.beforeAll = () => {
@@ -61,7 +80,9 @@ const patchBeforeAll = () => {
 }
 
 /**
- * Patch AfterAll of the Mocha Suite to do nothing
+ * Patch after() to do nothing
+ * @example
+ * patchAfterAll()
  */
 const patchAfterAll = () => {
   Mocha.Suite.prototype.afterAll = () => {
@@ -70,9 +91,12 @@ const patchAfterAll = () => {
 }
 
 /**
+ * This function is ported from Mocha run helpers
+ *
  * Exits Mocha when Mocha itself has finished execution, regardless of
  * what the tests or code under test is doing.
  * @param {number} code - Exit code; typically # of failures
+ * @private
  */
 const exitMocha = code => {
   const clampedCode = Math.min(code, 255)
@@ -100,12 +124,35 @@ const exitMocha = code => {
 }
 
 /**
- * Run mocha programatically on the given test files
- * @param {Array} files list of the test files
- * @param {Object} mochaArgs Object holding mocha arguments, Refer to mocha's documentation
+ * Run mocha programatically on given test files
+ * @async
+ * @param {Array} [files=[]] Array of test files
+ * @param {Object} [mochaOptions={}] Mocha options, refer to {@link https://mochajs.org/api/mocha|mocha's api documentation}
+ * @returns {Promise<Mocha.Runner>} Promise with the {@link https://mochajs.org/api/runner|mocha runner instance} that ran all the tests
+ * @see {@link https://mochajs.org/api/|Mocha API documentation}
+ *
+ * @example <caption>To run the tests in ./test/main.test.js with default mocha options</caption>
+ * > runMocha(['./test/main.test.js'])
+ * ```
+ *    test suite
+ *    ✓ test case
+ *
+ *  1 passing (7ms)
+ * ```
+ *
+ * @example <caption>To run the tests in ./test/main.test.js with the nyan mocha reporter</caption>
+ * > runMocha(['./test/main.test.js'], { reporter: 'nyan' })
+ * ```
+ *  1 -__,------,
+ *  0 -__|  /\_/\
+ *  0 -_~|_( ^ .^)
+ *    -_ ""  ""
+ *
+ * 1 passing (11ms)
+ * ```
  */
-const runMocha = async (files = [], mochaArgs = {}) => {
-  const mocha = new Mocha(mochaArgs)
+const runMocha = async (files = [], mochaOptions = {}) => {
+  const mocha = new Mocha(mochaOptions)
   files.forEach((testFile) => {
     mocha.addFile(testFile)
   })
@@ -118,8 +165,13 @@ const runMocha = async (files = [], mochaArgs = {}) => {
 }
 
 /**
- * List all tests that were executed by the test runner
- * @param {Mocha.Runner} runner Mocha's test runner after calling .run()
+ * List all tests that were executed by a mocha test runner
+ * @see {@link https://mochajs.org/api/runner|Mocha Runner}
+ * @param {Mocha.Runner} runner {@link https://mochajs.org/api/runner|Mocha Runner instance}
+ * @returns {String[]} Array of the full test names that were executed (Root suite name + child suite names + test name)
+ * @example
+ * > listExecutedTests(runMocha(['./test/main.test.js'], { reporter: 'base' }))
+ * [ 'test suite test case' ]
  */
 const listExecutedTests = (runner) => {
   const listTests = (suite) => {
@@ -136,7 +188,9 @@ const listExecutedTests = (runner) => {
 }
 
 /**
- * Start Mocha
+ * Start mocha by requiring the _mocha script
+ * @example
+ * startMocha()
  */
 const startMocha = () => {
   require('mocha/bin/_mocha')
