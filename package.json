@@ -30,7 +30,8 @@
   "license": "MIT",
   "scripts": {
     "test": "standard && tav",
-    "test:dev": "node list.js"
+    "test:dev": "node list.js",
+    "generate:doc:API:md": "documentation build index.js -f md --resolve node --sort-order alpha -o API.md --markdown-toc-max-depth 2"
   },
   "dependencies": {},
   "peerDependencies": {
