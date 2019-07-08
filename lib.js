@@ -176,12 +176,9 @@ const runMocha = async (files = [], mochaOptions = {}) => {
 const listExecutedTests = (runner) => {
   const listTests = (suite) => {
     let tests = []
-    for (const test of suite.tests) {
-      tests.push(suite.fullTitle() + ' ' + test.title)
-    }
-    for (const s of suite.suites) {
-      tests = tests.concat(listTests(s))
-    }
+    if (suite === null || suite === undefined) return tests
+    if (Array.isArray(suite.tests)) suite.tests.forEach(t => tests.push(suite.fullTitle() + ' ' + t.title))
+    if (Array.isArray(suite.suites)) suite.suites.forEach(s => { tests = tests.concat(listTests(s)) })
     return tests
   }
   return listTests(runner.suite)
