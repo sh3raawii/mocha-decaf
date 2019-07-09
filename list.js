@@ -22,7 +22,7 @@ const getArgs = () => {
 const main = async () => {
   const args = getArgs()
   const files = listFiles(args.testDir).filter(isJSFile)
-  const runner = runMocha(files, { reporter: 'min' })
+  const runner = runMocha(files, { reporter: 'base' })
   return listExecutedTests(runner)
 }
 
