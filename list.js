@@ -22,13 +22,15 @@ const getArgs = () => {
 const main = async () => {
   const args = getArgs()
   const files = listFiles(args.testDir).filter(isJSFile)
-  const runner = await runMocha(files, { reporter: 'min' })
-  const tests = listExecutedTests(runner)
-  console.log(tests.join('\n'))
-  return tests
+  const runner = runMocha(files, { reporter: 'min' })
+  return listExecutedTests(runner)
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exit(-1)
-})
+main()
+  .then(tests => {
+    console.log(tests.join('\n'))
+  })
+  .catch(error => {
+    console.error(error)
+    process.exit(-1)
+  })

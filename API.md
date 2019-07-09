@@ -24,8 +24,10 @@ does the file has the extension of JS files (\*.js)
 ### Examples
 
 ```javascript
-> isJSFile('./index.js')
-true
+isJSFile('./index.js')
+// true
+isJSFile('./package.json')
+// false
 ```
 
 Returns **[boolean][12]** true if the file has .js extension, false otherwise
@@ -43,11 +45,11 @@ List all tests that were executed by a mocha test runner
 ### Examples
 
 ```javascript
-> listExecutedTests(runMocha(['./test/main.test.js'], { reporter: 'base' }))
-[ 'test suite test case' ]
+listExecutedTests(runMocha(['./test/main.test.js'], { reporter: 'base' }))
+// [ 'test suite test case' ]
 ```
 
-Returns **[Array][14]&lt;[string][11]>** Array of the full test names that were executed (Root suite name + child suite names + test name)
+Returns **[Array][14]&lt;[string][11]>** array of the full test names that were executed (Root suite name + child suite names + test name)
 
 ## listFiles
 
@@ -55,19 +57,19 @@ List all the files in a given directory, by default in recursive mode
 
 ### Parameters
 
--   `dir` **[string][11]** Path to a dir
--   `recursive` **[boolean][12]** Search in nested directories (optional, default `true`)
+-   `dir` **[string][11]** path to a dir
+-   `recursive` **[boolean][12]** search in nested directories (optional, default `true`)
 
 ### Examples
 
 ```javascript
-> listFiles('./')
-['main.js', 'package.json', 'README.md', 'test/main.test.js']
-> listFiles('./', false)
-['main.js', 'package.json', 'README.md']
+listFiles('./')
+// ['main.js', 'package.json', 'README.md', 'test/main.test.js']
+listFiles('./', false)
+// ['main.js', 'package.json', 'README.md']
 ```
 
-Returns **[Array][14]&lt;[string][11]>** Array of files found in the given directory
+Returns **[Array][14]&lt;[string][11]>** array of files found in the given directory
 
 ## patchAfterAll
 
@@ -127,40 +129,38 @@ Run mocha programatically on given test files
 
 ### Parameters
 
--   `files` **[Array][14]** Array of test files (optional, default `[]`)
--   `mochaOptions` **[Object][16]** Mocha options, refer to [mocha's api documentation][17] (optional, default `{}`)
+-   `files` **[Array][14]** array of test files (optional, default `[]`)
+-   `mochaOptions` **[Object][16]** mocha options, refer to [mocha's api documentation][17] (optional, default `{}`)
 
 ### Examples
 
 To run the tests in ./test/main.test.js with default mocha options
 
 
-````javascript
-> runMocha(['./test/main.test.js'])
+```javascript
+runMocha(['./test/main.test.js'])
+//
+//    test suite
+//    ✓ test case
+//
+//  1 passing (7ms)
 ```
-   test suite
-   ✓ test case
-
- 1 passing (7ms)
-```
-````
 
 To run the tests in ./test/main.test.js with the nyan mocha reporter
 
 
-````javascript
-> runMocha(['./test/main.test.js'], { reporter: 'nyan' })
+```javascript
+runMocha(['./test/main.test.js'], { reporter: 'nyan' })
+//
+//  1 -__,------,
+//  0 -__|  /\_/\
+//  0 -_~|_( ^ .^)
+//    -_ ""  ""
+//
+// 1 passing (11ms)
 ```
- 1 -__,------,
- 0 -__|  /\_/\
- 0 -_~|_( ^ .^)
-   -_ ""  ""
 
-1 passing (11ms)
-```
-````
-
-Returns **[Promise][18]&lt;Mocha.Runner>** Promise with the [mocha runner instance][13] that ran all the tests
+Returns **Mocha.Runner** mocha [runner][13] instance that ran all the tests
 
 ## startMocha
 
@@ -205,5 +205,3 @@ startMocha()
 [16]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [17]: https://mochajs.org/api/mocha
-
-[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise

@@ -7,21 +7,23 @@ const fs = require('fs')
  * @param {string} filePath path to a file
  * @returns {boolean} true if the file has .js extension, false otherwise
  * @example
- * > isJSFile('./index.js')
- * true
+ * isJSFile('./index.js')
+ * // true
+ * isJSFile('./package.json')
+ * // false
  */
 const isJSFile = (filePath) => filePath.substr(-3) === '.js'
 
 /**
  * List all the files in a given directory, by default in recursive mode
- * @param {string} dir Path to a dir
- * @param {boolean} [recursive=true] Search in nested directories
- * @returns {string[]} Array of files found in the given directory
+ * @param {string} dir path to a dir
+ * @param {boolean} [recursive=true] search in nested directories
+ * @returns {string[]} array of files found in the given directory
  * @example
- * > listFiles('./')
- * ['main.js', 'package.json', 'README.md', 'test/main.test.js']
- * > listFiles('./', false)
- * ['main.js', 'package.json', 'README.md']
+ * listFiles('./')
+ * // ['main.js', 'package.json', 'README.md', 'test/main.test.js']
+ * listFiles('./', false)
+ * // ['main.js', 'package.json', 'README.md']
  */
 const listFiles = (dir, recursive = true) => {
   let JSFiles = []
@@ -125,33 +127,30 @@ const exitMocha = code => {
 
 /**
  * Run mocha programatically on given test files
- * @async
- * @param {Array} [files=[]] Array of test files
- * @param {Object} [mochaOptions={}] Mocha options, refer to {@link https://mochajs.org/api/mocha|mocha's api documentation}
- * @returns {Promise<Mocha.Runner>} Promise with the {@link https://mochajs.org/api/runner|mocha runner instance} that ran all the tests
+ * @param {Array} [files=[]] array of test files
+ * @param {Object} [mochaOptions={}] mocha options, refer to {@link https://mochajs.org/api/mocha|mocha's api documentation}
+ * @returns {Mocha.Runner} mocha {@link https://mochajs.org/api/runner|runner} instance that ran all the tests
  * @see {@link https://mochajs.org/api/|Mocha API documentation}
  *
  * @example <caption>To run the tests in ./test/main.test.js with default mocha options</caption>
- * > runMocha(['./test/main.test.js'])
- * ```
- *    test suite
- *    ✓ test case
- *
- *  1 passing (7ms)
- * ```
+ * runMocha(['./test/main.test.js'])
+ * //
+ * //    test suite
+ * //    ✓ test case
+ * //
+ * //  1 passing (7ms)
  *
  * @example <caption>To run the tests in ./test/main.test.js with the nyan mocha reporter</caption>
- * > runMocha(['./test/main.test.js'], { reporter: 'nyan' })
- * ```
- *  1 -__,------,
- *  0 -__|  /\_/\
- *  0 -_~|_( ^ .^)
- *    -_ ""  ""
- *
- * 1 passing (11ms)
- * ```
+ * runMocha(['./test/main.test.js'], { reporter: 'nyan' })
+ * //
+ * //  1 -__,------,
+ * //  0 -__|  /\_/\
+ * //  0 -_~|_( ^ .^)
+ * //    -_ ""  ""
+ * //
+ * // 1 passing (11ms)
  */
-const runMocha = async (files = [], mochaOptions = {}) => {
+const runMocha = (files = [], mochaOptions = {}) => {
   const mocha = new Mocha(mochaOptions)
   files.forEach((testFile) => {
     mocha.addFile(testFile)
@@ -168,10 +167,10 @@ const runMocha = async (files = [], mochaOptions = {}) => {
  * List all tests that were executed by a mocha test runner
  * @see {@link https://mochajs.org/api/runner|Mocha Runner}
  * @param {Mocha.Runner} runner {@link https://mochajs.org/api/runner|Mocha Runner instance}
- * @returns {string[]} Array of the full test names that were executed (Root suite name + child suite names + test name)
+ * @returns {string[]} array of the full test names that were executed (Root suite name + child suite names + test name)
  * @example
- * > listExecutedTests(runMocha(['./test/main.test.js'], { reporter: 'base' }))
- * [ 'test suite test case' ]
+ * listExecutedTests(runMocha(['./test/main.test.js'], { reporter: 'base' }))
+ * // [ 'test suite test case' ]
  */
 const listExecutedTests = (runner) => {
   const listTests = (suite) => {
