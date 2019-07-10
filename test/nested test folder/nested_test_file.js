@@ -1,4 +1,4 @@
-describe('nested test suite', async () => {
+describe('nested test suite', () => {
   before(() => {
     throw new Error('BeforeAll hook was triggered')
   })
@@ -17,5 +17,11 @@ describe('nested test suite', async () => {
 
   it('nested test case', async () => {
     throw new Error('nested test case body was executed')
+  })
+
+  describe('another nested test suite', () => {
+    it('another nested test case', async () => {
+      throw new Error('another nested test case body was executed')
+    })
   })
 })

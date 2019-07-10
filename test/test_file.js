@@ -1,4 +1,4 @@
-describe('test suite', async () => {
+describe('test suite', () => {
   before(() => {
     throw new Error('BeforeAll hook was triggered')
   })

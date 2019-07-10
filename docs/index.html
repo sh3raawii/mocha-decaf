@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mocha-decaf - Run Mocha tests in dry run mode</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Run Mocha tests in dry run mode">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" title="vue" disabled>
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dark.css" title="dark">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/buble.css" title="buble" disabled>
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/pure.css" title="pure" disabled>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'mocha-decaf',
+      repo: 'https://github.com/sh3raawii/mocha-decaf',
+      // This alias is meant to mount the root / endpoint to the /latest folder as a hack to versioning support
+      alias: {
+        // don't match version urls eg. /v0.1.0/API
+        // don't match the /latest/ endpoints to avoid infinite loops
+        '/(?!latest)(?!v\\d)(.*)': '/latest/$1',
+      },
+      loadSidebar: true,
+      subMaxLevel: 2
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+</body>
+</html>

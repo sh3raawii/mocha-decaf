@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-const Mocha = require('mocha')
-const { listAllFiles, isJSFile, patchTestRunner, patchBeforeEach, patchAfterEach, patchBeforeAll, patchAfterAll, exitMocha } = require('./lib')
+const { isJSFile, listFiles, listExecutedTests, runMocha } = require('./lib')
 
 const getArgs = () => {
   if ((process.argv.length <= 2) || ((process.argv[2] === '-h') || (process.argv[2] === '--help'))) {
@@ -18,28 +17,20 @@ const getArgs = () => {
  * Searches for all JS files under the specified test dir
  * Patch Mocha's test runner
  * Run Mocha programmatically
+ * List the full title of all executed tests
  */
 const main = async () => {
   const args = getArgs()
-  // Instantiate a Mocha instance
-  const mocha = new Mocha()
-  // List all JS files and add them to mocha
-  const files = listAllFiles(args.testDir)
-  files.filter(isJSFile).forEach((testFile) => {
-    mocha.addFile(testFile)
-  })
-  // Patch Mocha's hooks
-  patchBeforeEach()
-  patchAfterEach()
-  patchBeforeAll()
-  patchAfterAll()
-  // Patch Mocha's test runner
-  patchTestRunner()
-  // Run the tests
-  mocha.run(exitMocha)
+  const files = listFiles(args.testDir).filter(isJSFile)
+  const runner = runMocha(files, { reporter: 'base' })
+  return listExecutedTests(runner)
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exit(-1)
-})
+main()
+  .then(tests => {
+    console.log(tests.join('\n'))
+  })
+  .catch(error => {
+    console.error(error)
+    process.exit(-1)
+  })
