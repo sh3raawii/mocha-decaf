@@ -42,6 +42,12 @@ For a complete list of the available functions check the API documentation
 $ mocha-list ./test
 ```
 
+## How is this package useful ?
+
+- You can use this package to list all the tests that should be run without actually running them to show what your tests are covering to stakeholders
+
+- You can also do all sorts of stuff before you actually run your tests using `mocha` like partitioning the tests to run them in batches on different machines in parallel, checkout [Mocha's test filters](https://mochajs.org/#command-line-usage)
+
 ## Notes
 
 - This package is only useful till `mocha` implements this functionality, however it doesn't seem this is going to happen in the near future since a [PR](https://github.com/mochajs/mocha/pull/1070) was submitted 6 years ago and rejected.
