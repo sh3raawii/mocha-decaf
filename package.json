@@ -1,6 +1,6 @@
 {
   "name": "mocha-decaf",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Run Mocha tests in dry run mode",
   "keywords": [
     "mocha",
