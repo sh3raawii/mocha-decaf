@@ -10,7 +10,8 @@ const {
   patchBeforeEach,
   patchAfterEach,
   patchBeforeAll,
-  patchAfterAll } = require('./lib')
+  patchAfterAll
+} = require('./lib')
 
 // Patch Mocha's Hooks
 patchBeforeEach()
