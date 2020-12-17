@@ -1,6 +1,6 @@
 {
   "name": "mocha-decaf",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Run Mocha tests in dry run mode",
   "keywords": [
     "mocha",
@@ -47,7 +47,7 @@
     "test-all-versions": "^5.0.1"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=10.23.0"
   },
   "standard": {
     "env": {
