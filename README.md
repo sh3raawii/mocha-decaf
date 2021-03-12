@@ -2,7 +2,7 @@
 
 Run mocha tests in dry-run mode, it's like [mocha](https://mochajs.org/) but without caffeine
 
-[![Build Status](https://travis-ci.org/sh3raawii/mocha-decaf.svg?branch=master)](https://travis-ci.org/sh3raawii/mocha-decaf)
+[![Build Status](https://github.com/sh3raawii/mocha-decaf/actions/workflows/node.js.yml/badge.svg)](https://github.com/sh3raawii/mocha-decaf/actions/workflows/node.js.yml)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 ## Install
